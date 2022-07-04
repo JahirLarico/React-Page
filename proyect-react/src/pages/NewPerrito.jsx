@@ -7,7 +7,7 @@ const idPerro = localStorage.getItem('idPerro');
 const nombrePerro = localStorage.getItem('nombrePerro');
 const razaPerro = localStorage.getItem('razaPerro');
 const edadPerro = localStorage.getItem('edadPerro');
-const fotoPerro = localStorage.getItem('fotoPerro');
+const fotoPerro = localStorage.getItem('foto');
 const dueñoId = localStorage.getItem('idDueno');
 const tipo = localStorage.getItem('tipo');
 function NewPerrito(){
@@ -26,19 +26,20 @@ function NewPerrito(){
             edad : JSONedad,
             dueño : dueñoId
         }
-        axios.post('http://localhost:8000/user/perros?idDueno='+dueñoId,data);
+        axios.post('https://apidjango.frankalvarez.dev/user/perros?idDueno='+dueñoId,data);
         navigate("/");
     }
     function edit(e){
         e.preventDefault();
         const data = {
             id : idPerro,
+            foto : JSONfoto,
             nombre_perrito : JSONnombre,
             raza : JSONraza,
             edad : JSONedad,
             dueño : dueñoId
         }
-        axios.put('http://localhost:8000/user/perros/edit?idDueno='+dueñoId+"&idPerro="+idPerro,data);
+        axios.put('https://apidjango.frankalvarez.dev/user/perros/edit?idDueno='+dueñoId+"&idPerro="+idPerro,data);
         navigate("/");
     }
     if (tipo === "edit"){
@@ -76,6 +77,14 @@ function NewPerrito(){
                                                     defaultValue = {edadPerro} onChange={(e)=>setJSONedad(e.target.value)}
                                                     />
                                                     <label for="inputPassword">Edad</label>
+                                                </div>
+                                                <div className="form-floating mb-3">
+                                                    <input className="form-control"
+                                                    id="edadPerro"
+                                                    type="text"
+                                                    defaultValue = {fotoPerro} onChange={(e)=>setJSONfoto(e.target.value)}
+                                                    />
+                                                    <label for="inputPassword">Foto del perro(URL)</label>
                                                 </div>
                                                 <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                     <input type="submit" className="btn btn-primary" value="Terminar Edit"/>
@@ -142,10 +151,10 @@ function NewPerrito(){
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
                                                     id="edadPerro"
-                                                    type="file"
+                                                    type="text"
                                                      onChange={(e)=>setJSONfoto(e.target.value)}
                                                     />
-                                                    <label for="inputPassword">Foto</label>
+                                                    <label for="inputPassword">Foto del perro(URL)</label>
                                                 </div>
                                                 <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                     <input type="submit" className="btn btn-primary" value="Agregar"/>

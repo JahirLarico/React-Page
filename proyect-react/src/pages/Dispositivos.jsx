@@ -14,11 +14,16 @@ function Dispositivos(){
     const navigate = useNavigate()
 
     const deleteDispo = async(idDispo)=>{
-      const res = axios.delete('http://localhost:8000/user/dispositivos/edit?idDueno='+userId+'&idDispo='+idDispo);
+      if (window.confirm('¿Estas seguro de eliminar este dispositivo?')) {
+      const res = axios.delete('https://apidjango.frankalvarez.dev/user/dispositivos/edit?idDueno='+userId+'&idDispo='+idDispo);
       window.location.reload();
+      }
+      else{
+
+      }
     }
     const getDispositivos =async()=>{
-      const res = await axios.get('http://localhost:8000/user/dispositivos?userId='+ userId);
+      const res = await axios.get('https://apidjango.frankalvarez.dev/user/dispositivos?userId='+ userId);
       setDispositivos(res.data);
     }
     const addDispositivo = async()=>{

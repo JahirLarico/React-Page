@@ -11,7 +11,7 @@ function Horarios(){
     const [horarios,setHorarios] = useState([]);
     const idDispo = localStorage.getItem('idDispo');
     const getHorarios =async()=>{
-        const res = await axios.get('http://localhost:8000/dispositivo/horarios?dispositivoId='+ idDispo);
+        const res = await axios.get('https://apidjango.frankalvarez.dev/dispositivo/horarios?dispositivoId='+ idDispo);
         setHorarios(res.data);
     }
     const navigate = useNavigate()

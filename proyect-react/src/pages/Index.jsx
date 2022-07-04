@@ -15,7 +15,7 @@ function App() {
   const [dogs,setdogs] = useState([]);
   const navigate = useNavigate()
   const getDoggs =async()=>{
-    const res = await axios.get('http://127.0.0.1:8000/user/perros?idDueno='+authUser);
+    const res = await axios.get('https://apidjango.frankalvarez.dev/user/perros?idDueno='+authUser);
     setdogs(res.data);
   }
 
@@ -34,7 +34,7 @@ function App() {
       return navigate("/login")
     }
     else{
-      axios.get("http://127.0.0.1:8000/userDetail?username="+usuario)
+      axios.get("https://apidjango.frankalvarez.dev/userDetail?username="+usuario)
       .then(res => {
         setAuthUser(res.data.id);
       })
@@ -47,9 +47,12 @@ function App() {
   }
 
   const deleteDog = async(idPerro)=>{
-    console.log(idPerro)
-    axios.delete('http://localhost:8000/user/perros/edit?idDueno='+authUser+'&idPerro='+idPerro);
+    if (window.confirm('¿Estas seguro de eliminar este perro?')) {
+    axios.delete('https://apidjango.frankalvarez.dev/user/perros/edit?idDueno='+authUser+'&idPerro='+idPerro);
     window.location.reload();
+    }
+    else{
+    }
   }
   const editDog = async(idPerro, nombrePerro, razaPerro , edadPerro, ultima , fotoPerro)=>{
     localStorage.setItem('idPerro',idPerro);
@@ -88,7 +91,7 @@ function App() {
             <tbody>
               {dogs.map((dog)=>(
                 <tr key={dog.id}>
-                  <td><img src="localhost:8000/media/perritos/7up.jpg" alt="foto" width="100" height="100"/></td>
+                    <td> <img src={dog.foto} alt="Imagen del prro" height="50"></img></td>
                     <td>{dog.nombre_perrito}</td>
                     <td>{dog.raza}</td>
                     <td>{dog.edad}</td>

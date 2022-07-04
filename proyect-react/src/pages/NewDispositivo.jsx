@@ -25,7 +25,7 @@ function NewDispositivo(){
             horarios :[]
 
         }
-        axios.post('http://localhost:8000/user/dispositivos?userId='+ idDueno, data)
+        axios.post('https://apidjango.frankalvarez.dev/user/dispositivos?userId='+ idDueno, data)
         navigate('/dispositivos')
     }
     function edit(e){
@@ -38,7 +38,7 @@ function NewDispositivo(){
                 propietario: idDueno,
                 horarios: []
         }
-        axios.put('http://localhost:8000/user/dispositivos/edit?idDueno='+idDueno+ "&idDispo=" + idDispo, data)
+        axios.put('https://apidjango.frankalvarez.dev/user/dispositivos/edit?idDueno='+idDueno+ "&idDispo=" + idDispo, data)
         navigate('/dispositivos')
     }
 

@@ -15,17 +15,17 @@ function Register(){
                 perros : [],
                 dispositivos: []
         }
-        axios.post('http://localhost:8000/users',data)
+        axios.post('https://apidjango.frankalvarez.dev/users',data)
         .then((datos)=>{
             console.log(datos.data)
             const codefing = {
-                id: datos.data.id,  
+                id: datos.data.id,
                 username:  datos.data.username,
                 password:  datos.data.password,
                 perros : [],
                 dispositivos: []
             }
-            axios.put('http://localhost:8000/userDetail?username=',codefing)
+            axios.put('https://apidjango.frankalvarez.dev/userDetail?username='+username,codefing)
             navigate('/login')
         })}
     return(
