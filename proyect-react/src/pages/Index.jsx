@@ -15,6 +15,7 @@ function App() {
   const [dogs,setdogs] = useState([]);
   const navigate = useNavigate()
   const getDoggs =async()=>{
+    localStorage.setItem('idDueno',authUser);
     const res = await axios.get('https://apidjango.frankalvarez.dev/user/perros?idDueno='+authUser);
     setdogs(res.data);
   }
@@ -60,7 +61,6 @@ function App() {
     localStorage.setItem('razaPerro',razaPerro);
     localStorage.setItem('edadPerro',edadPerro);
     localStorage.setItem('ultima_alimnetacion',ultima);
-    localStorage.setItem('idDueno',authUser);
     localStorage.setItem('foto', fotoPerro)
     localStorage.setItem('tipo',"edit");
     navigate("/newPerrito");
