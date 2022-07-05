@@ -56,7 +56,7 @@ function Register(){
                                                 <label>Contraseña del usuario</label>
                                             </div>
                                             <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <input type="submit" className="btn btn-primary" value="Login"/>
+                                                <input type="submit" className="btn btn-primary" value="Agregar usuario"/>
                                             </div>
                                             <Link to="/login"  className="btn btn-primary">Cancelar</Link>
                                         </form>

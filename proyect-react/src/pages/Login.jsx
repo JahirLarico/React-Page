@@ -13,7 +13,6 @@ function Login() {
         AuthService.login(usuario,password)
         .then(()=>{
             localStorage.setItem('username',usuario);
-            localStorage.setItem('password',password);
             return navigate('/')
         },
         error =>{

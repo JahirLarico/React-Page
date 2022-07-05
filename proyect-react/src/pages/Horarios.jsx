@@ -24,7 +24,19 @@ function Horarios(){
     const logout=()=> {
       if (window.confirm('¿Estas seguro de cerrar sesión?')) {
         AuthService.destroyToken()
-      navigate("/login")
+        localStorage.removeItem('foto')
+        localStorage.removeItem('idDispo')
+        localStorage.removeItem('nombreDispo')
+        localStorage.removeItem('username')
+        localStorage.removeItem('edadPerro')
+        localStorage.removeItem('urlDispo')
+        localStorage.removeItem('idPerro')
+        localStorage.removeItem('nombrePerro')
+        localStorage.removeItem('razaPerro')
+        localStorage.removeItem('tipo')
+        localStorage.removeItem('ubicacionDispo')
+        localStorage.removeItem('idDueno')
+        navigate("/login")
       }
       else {}
     }
