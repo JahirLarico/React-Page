@@ -41,21 +41,19 @@ function Register(){
                                         <form onSubmit={add}>
                                             <div className="form-floating mb-3">
                                                 <input className="form-control"
-                                                id="inputText"
                                                 type="text"
                                                 placeholder="usuario"
                                                 onChange={(e)=>setUsername(e.target.value)}
                                                 />
-                                                <label for="inputText">Nombre del usuario</label>
+                                                <label>Nombre del usuario</label>
                                             </div>
                                             <div className="form-floating mb-3">
                                                 <input className="form-control"
-                                                id="inputPassword"
                                                 type="password"
                                                 placeholder="Password"
                                                 onChange={(e)=>setPassword(e.target.value)}
                                                 />
-                                                <label for="inputPassword">Contraseña del usuario</label>
+                                                <label>Contraseña del usuario</label>
                                             </div>
                                             <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <input type="submit" className="btn btn-primary" value="Login"/>

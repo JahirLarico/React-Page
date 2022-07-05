@@ -38,7 +38,7 @@ function Login() {
                                                         placeholder="usuario"
                                                         value = {usuario} onChange={(e)=>setUsuario(e.target.value)}
                                                         />
-                                                        <label for="inputText">Usuario</label>
+                                                        <label >Usuario</label>
                                                     </div>
                                                     <div className="form-floating mb-3">
                                                         <input className="form-control"
@@ -47,7 +47,7 @@ function Login() {
                                                         placeholder="Password"
                                                         value = {password} onChange={(e)=>setPassword(e.target.value)}
                                                         />
-                                                        <label for="inputPassword">Password</label>
+                                                        <label >Password</label>
                                                     </div>
                                                     <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                     <p> Olvidaste tu contraseña?</p>
@@ -64,7 +64,7 @@ function Login() {
                                             </div>
                                             <div className="card-footer text-center py-3">
                                                 <div className="small">
-                                                    <p>No tienes cuenta? </p> 
+                                                    <p>No tienes cuenta? </p>
                                                     <a href="/register">Registrate</a>
                                                 </div>
                                             </div>

@@ -1,16 +1,17 @@
 import {Link} from 'react-router-dom'
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const idDueno = localStorage.getItem('idDueno');
-const ubicacionDispo = localStorage.getItem('ubicacionDispo');
-const idDispo = localStorage.getItem('idDispo');
-const tipo = localStorage.getItem('tipo');
-const urlDispo = localStorage.getItem('urlDispo');
-const nombreDispo = localStorage.getItem('nombreDispo');
+
 function NewDispositivo(){
     const navigate = useNavigate()
+    const idDueno = localStorage.getItem('idDueno');
+    const ubicacionDispo = localStorage.getItem('ubicacionDispo');
+    const idDispo = localStorage.getItem('idDispo');
+    const tipo = localStorage.getItem('tipo');
+    const urlDispo = localStorage.getItem('urlDispo');
+    const nombreDispo = localStorage.getItem('nombreDispo');
     const [JSONnombreDispo,setJSONnombreDispo] = useState(nombreDispo);
     const [JSONurlDispo,setJSONurlDispo] = useState(urlDispo);
     const [JSONubicacion , setJSONubicacion] = useState(ubicacionDispo);
@@ -56,30 +57,27 @@ function NewDispositivo(){
                                             <form onSubmit={add}>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
-                                                    id="inputText"
                                                     type="text"
                                                     placeholder="NOMBRE DEL DISPO"
                                                     onChange={(e) => setJSONnombreDispo(e.target.value)}
                                                     />
-                                                    <label for="inputText">Nombre del dispositivo</label>
+                                                    <label>Nombre del dispositivo</label>
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
-                                                    id="inputText"
                                                     type="text"
                                                     placeholder="usuario"
                                                     onChange={(e) => setJSONurlDispo(e.target.value)}
                                                     />
-                                                    <label for="inputText">URL del dispositivo</label>
+                                                    <label>URL del dispositivo</label>
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
-                                                    id="inputText"
                                                     type="text"
                                                     placeholder="usuario"
                                                     onChange={(e) => setJSONubicacion(e.target.value)}
                                                     />
-                                                    <label for="inputText">Ubicacion del dispositivo</label>
+                                                    <label>Ubicacion del dispositivo</label>
                                                 </div>
                                                 <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                     <input type="submit" className="btn btn-primary" value="Agregar"/>
@@ -121,30 +119,27 @@ function NewDispositivo(){
                                             <form onSubmit={edit}>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
-                                                    id="inputText"
                                                     type="text"
                                                     placeholder="usuario"
                                                     defaultValue={JSONnombreDispo} onChange={(e) => setJSONnombreDispo(e.target.value)}
                                                     />
-                                                    <label for="inputText">Nombre del dispositivo</label>
+                                                    <label>Nombre del dispositivo</label>
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
-                                                    id="inputText"
                                                     type="text"
                                                     placeholder="usuario"
                                                     defaultValue={JSONurlDispo} onChange={(e) => setJSONurlDispo(e.target.value)}
                                                     />
-                                                    <label for="inputText">URL del dispositivo</label>
+                                                    <label>URL del dispositivo</label>
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
-                                                    id="inputText"
                                                     type="text"
                                                     placeholder="usuario"
                                                     defaultValue={JSONubicacion} onChange={(e) => setJSONubicacion(e.target.value)}
                                                     />
-                                                    <label for="inputText">Ubicacion del dispositivo</label>
+                                                    <label>Ubicacion del dispositivo</label>
                                                 </div>
                                                 <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                     <input type="submit" className="btn btn-primary" value="Editar"/>

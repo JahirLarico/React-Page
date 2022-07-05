@@ -3,14 +3,15 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const idPerro = localStorage.getItem('idPerro');
-const nombrePerro = localStorage.getItem('nombrePerro');
-const razaPerro = localStorage.getItem('razaPerro');
-const edadPerro = localStorage.getItem('edadPerro');
-const fotoPerro = localStorage.getItem('foto');
-const dueñoId = localStorage.getItem('idDueno');
-const tipo = localStorage.getItem('tipo');
+
 function NewPerrito(){
+    const idPerro = localStorage.getItem('idPerro');
+    const nombrePerro = localStorage.getItem('nombrePerro');
+    const razaPerro = localStorage.getItem('razaPerro');
+    const edadPerro = localStorage.getItem('edadPerro');
+    const fotoPerro = localStorage.getItem('foto');
+    const dueñoId = localStorage.getItem('idDueno');
+    const tipo = localStorage.getItem('tipo');
     const navigate = useNavigate()
     const [JSONnombre , setJSONnombre] = useState(nombrePerro);
     const [JSONraza , setJSONraza] = useState(razaPerro);
@@ -56,35 +57,31 @@ function NewPerrito(){
                                             <form onSubmit={edit}>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
-                                                    id="nombrePerro"
                                                     type="text"
                                                     defaultValue = {nombrePerro} onChange={(e)=>setJSONnombre(e.target.value)}
                                                     />
-                                                    <label for="inputText">Nombre del perro</label>
+                                                    <label>Nombre del perro</label>
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
-                                                    id="razaPerro"
                                                     type="text"
                                                     defaultValue = {razaPerro} onChange={(e)=>setJSONraza(e.target.value)}
                                                     />
-                                                    <label for="inputPassword">Raza</label>
+                                                    <label>Raza</label>
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
-                                                    id="edadPerro"
                                                     type="text"
                                                     defaultValue = {edadPerro} onChange={(e)=>setJSONedad(e.target.value)}
                                                     />
-                                                    <label for="inputPassword">Edad</label>
+                                                    <label>Edad</label>
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
-                                                    id="edadPerro"
                                                     type="text"
                                                     defaultValue = {fotoPerro} onChange={(e)=>setJSONfoto(e.target.value)}
                                                     />
-                                                    <label for="inputPassword">Foto del perro(URL)</label>
+                                                    <label>Foto del perro(URL)</label>
                                                 </div>
                                                 <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                     <input type="submit" className="btn btn-primary" value="Terminar Edit"/>
@@ -126,41 +123,36 @@ function NewPerrito(){
                                             <form onSubmit={add}>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
-                                                    id="nombrePerro"
                                                     type="text"
                                                     onChange={(e)=>setJSONnombre(e.target.value)}
                                                     />
-                                                    <label for="inputText">Nombre del perro</label>
+                                                    <label>Nombre del perro</label>
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
-                                                    id="razaPerro"
                                                     type="text"
                                                      onChange={(e)=>setJSONraza(e.target.value)}
                                                     />
-                                                    <label for="inputPassword">Raza</label>
+                                                    <label>Raza</label>
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
-                                                    id="edadPerro"
                                                     type="text"
                                                      onChange={(e)=>setJSONedad(e.target.value)}
                                                     />
-                                                    <label for="inputPassword">Edad</label>
+                                                    <label>Edad</label>
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
-                                                    id="edadPerro"
                                                     type="text"
                                                      onChange={(e)=>setJSONfoto(e.target.value)}
                                                     />
-                                                    <label for="inputPassword">Foto del perro(URL)</label>
+                                                    <label>Foto del perro(URL)</label>
                                                 </div>
                                                 <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                     <input type="submit" className="btn btn-primary" value="Agregar"/>
                                                 </div>
                                                 <Link to="/"  className="btn btn-primary">Cancelar</Link>
-    
                                             </form>
                                         </div>
                                     </div>

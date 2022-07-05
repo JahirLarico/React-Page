@@ -1,6 +1,5 @@
 import '../App.css';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
@@ -10,7 +9,6 @@ import AuthService from '../services/auth';
 import { useNavigate } from 'react-router-dom';
 function App() {
   const usuario = localStorage.getItem('username');
-  const password = localStorage.getItem('password');
   const [authUser,setAuthUser] = useState('');
   const [dogs,setdogs] = useState([]);
   const navigate = useNavigate()
@@ -41,10 +39,18 @@ function App() {
       })
     }
   },[])
-
+  const goIndex=()=>{
+    navigate('/');
+  }
+  const goDispo=()=>{
+    navigate ('/dispositivos');
+  }
   const logout=()=> {
-    AuthService.destroyToken()
+    if (window.confirm('¿Estas seguro de cerrar sesión?')) {
+      AuthService.destroyToken()
     navigate("/login")
+    }
+    else {}
   }
 
   const deleteDog = async(idPerro)=>{
@@ -52,8 +58,7 @@ function App() {
     axios.delete('https://apidjango.frankalvarez.dev/user/perros/edit?idDueno='+authUser+'&idPerro='+idPerro);
     window.location.reload();
     }
-    else{
-    }
+    else{}
   }
   const editDog = async(idPerro, nombrePerro, razaPerro , edadPerro, ultima , fotoPerro)=>{
     localStorage.setItem('idPerro',idPerro);
@@ -69,15 +74,15 @@ function App() {
     localStorage.setItem('tipo', "new");
     navigate("/newPerrito");
   }
-  if (dogs ) {
+  if (dogs.length>0) {
     return (
       <div>
         <Container>
-          <h1> El nombre del usuarios es {usuario} y su contra es {password} </h1>
-          <button onClick={logout}>Salir de la sesion</button>
-          <Link to ="/">Index</Link>
-          <Link to="/dispositivos">Ir a dispositivos</Link>
+          <h1>Perros del usuario: {usuario}</h1>
+          <Button variant="primary" onClick={goIndex}>Index</Button>
+          <Button variant="primary" onClick={goDispo}>Ir a dispositivos</Button>
           <Button variant="primary" onClick={addDog}>Agregar un nuevo Perrito</Button>
+          <Button variant='success' onClick={logout}>Salir de la sesion</Button>
           <Table striped bordered hover variant="dark">
             <thead>
               <tr>
@@ -91,7 +96,7 @@ function App() {
             <tbody>
               {dogs.map((dog)=>(
                 <tr key={dog.id}>
-                    <td> <img src={dog.foto} alt="Imagen del prro" height="50"></img></td>
+                    <td> <img src={dog.foto} alt="Imagen del prro" height="50" width="100"></img></td>
                     <td>{dog.nombre_perrito}</td>
                     <td>{dog.raza}</td>
                     <td>{dog.edad}</td>
@@ -107,16 +112,15 @@ function App() {
       </div>
     )
   }
-  else {
     return (
       <div>
         <Container>
-          <h1> El nombre del usuarios es {usuario} y su contra es {password} </h1>
-          <button onClick={logout}>Salir de la sesion</button>
-          <Link to ="/">Index</Link>
-          <Link to="/dispositivos">Ir a dispositivos</Link>
-          <Link to ="/perritos">Ir a perritos</Link>
-          <h2> No existen usuarios o algo salio mal al cargalos </h2>
+          <h1>Perros del usuario: {usuario}</h1>
+          <Button variant="primary" onClick={goIndex}>Index</Button>
+          <Button variant="primary" onClick={goDispo}>Ir a dispositivos</Button>
+          <Button variant="primary" onClick={addDog}>Agregar un nuevo Perrito</Button>
+          <Button variant='success' onClick={logout}>Salir de la sesion</Button>
+          <h2> No existen perros , pruebe ingresar alguno </h2>
           <Table striped bordered hover variant="dark">
             <thead>
               <tr>
@@ -132,7 +136,6 @@ function App() {
         </Container>
       </div>
     )
-  }
 }
 
 export default App;
