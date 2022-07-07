@@ -17,6 +17,52 @@ function NewPerrito(){
     const [JSONraza , setJSONraza] = useState(razaPerro);
     const [JSONedad , setJSONedad] = useState(edadPerro);
     const [JSONfoto , setJSONfoto] = useState(fotoPerro);
+
+    const [nombreMessage, setNombreMessage] = useState('');
+    const [razaMessage, setRazaMessage] = useState('');
+    const [edadMessage, setEdadMessage] = useState('');
+    const [fotoMessage, setFotoMessage] = useState('');
+
+    function validationNombrePerro(texto){
+        if(/^([A-Z]).*[a-zA-Z-0-9]/.test(texto)){
+            setJSONnombre(texto);
+            setNombreMessage("");
+        }
+        else {
+            setNombreMessage("Debe comenzar con mayuscula el nombre del perrito");
+        }
+    }
+    function validationRazaPerro(texto){
+        if(/^([A-Z]).*[a-zA-Z-0-9]/.test(texto)){
+            setJSONraza(texto);
+            setRazaMessage("");
+        }
+        else{
+            setRazaMessage("Debe comenzar con mayuscula la raza del perrito");
+        }
+    }
+
+    function validationEdadPerro(texto){
+        if(/^[0-9]{1,2}$/.test(texto)){
+            setJSONedad(texto);
+            setEdadMessage("");
+        }
+        else{
+            setEdadMessage("Debe ser solo numeros no mayores a 2 digitos");
+        }
+    }
+
+    function validationFotoPerro(texto){
+        if(/^[a-zA-Z0-9/,.&-;:_=?¡¿!]{0,100}$/.test(texto)){
+            setJSONfoto(texto);
+            setFotoMessage("");
+        }
+        else{
+            setFotoMessage("Debe ser solo letras, numeros, caracteres especiales y no mayor a 100 caracteres");
+        }
+    }
+
+
     function add(e){
         e.preventDefault();
         const data = {
@@ -58,35 +104,44 @@ function NewPerrito(){
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
                                                     type="text"
-                                                    defaultValue = {nombrePerro} onChange={(e)=>setJSONnombre(e.target.value)}
+                                                    defaultValue = {nombrePerro} onChange={(e)=>validationNombrePerro(e.target.value)}
                                                     />
                                                     <label>Nombre del perro</label>
+                                                    {nombreMessage&& <p className="text-danger">{nombreMessage}</p>}
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
                                                     type="text"
-                                                    defaultValue = {razaPerro} onChange={(e)=>setJSONraza(e.target.value)}
+                                                    defaultValue = {razaPerro} onChange={(e)=>validationRazaPerro(e.target.value)}
                                                     />
                                                     <label>Raza</label>
+                                                    {razaMessage&& <p className="text-danger">{razaMessage}</p>}
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
                                                     type="text"
-                                                    defaultValue = {edadPerro} onChange={(e)=>setJSONedad(e.target.value)}
+                                                    defaultValue = {edadPerro} onChange={(e)=>validationEdadPerro(e.target.value)}
                                                     />
                                                     <label>Edad</label>
+                                                    {edadMessage&& <p className="text-danger">{edadMessage}</p>}
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
                                                     type="text"
-                                                    defaultValue = {fotoPerro} onChange={(e)=>setJSONfoto(e.target.value)}
+                                                    defaultValue = {fotoPerro} onChange={(e)=>validationFotoPerro(e.target.value)}
                                                     />
                                                     <label>Foto del perro(URL)</label>
+                                                    {fotoMessage&& <p className="text-danger">{fotoMessage}</p>}
                                                 </div>
                                                 <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                    <input type="submit" className="btn btn-primary" value="Terminar Edit"/>
+                                                    <Link to="/"  className="btn btn-primary">Cancelar</Link>
+                                                    {(fotoMessage || razaMessage || edadMessage || nombreMessage)&&
+                                                        <input disabled={true} type="submit" className="btn btn-primary" value="Terminar Edit"/>
+                                                    }
+                                                    {(!fotoMessage && !razaMessage && !edadMessage && !nombreMessage)&&
+                                                        <input  type="submit" className="btn btn-primary" value="Terminar Edit"/>
+                                                    }
                                                 </div>
-                                                <Link to="/"  className="btn btn-primary">Cancelar</Link>
                                             </form>
                                         </div>
                                     </div>
@@ -124,35 +179,44 @@ function NewPerrito(){
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
                                                     type="text"
-                                                    onChange={(e)=>setJSONnombre(e.target.value)}
+                                                    onChange={(e)=>validationNombrePerro(e.target.value)}
                                                     />
                                                     <label>Nombre del perro</label>
+                                                    {nombreMessage&& <p className="text-danger">{nombreMessage}</p>}
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
                                                     type="text"
-                                                     onChange={(e)=>setJSONraza(e.target.value)}
+                                                     onChange={(e)=>validationRazaPerro(e.target.value)}
                                                     />
                                                     <label>Raza</label>
+                                                    {razaMessage&& <p className="text-danger">{razaMessage}</p>}
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
                                                     type="text"
-                                                     onChange={(e)=>setJSONedad(e.target.value)}
+                                                     onChange={(e)=>validationEdadPerro(e.target.value)}
                                                     />
                                                     <label>Edad</label>
+                                                    {edadMessage&& <p className="text-danger">{edadMessage}</p>}
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
                                                     type="text"
-                                                     onChange={(e)=>setJSONfoto(e.target.value)}
+                                                     onChange={(e)=>validationFotoPerro(e.target.value)}
                                                     />
                                                     <label>Foto del perro(URL)</label>
+                                                    {fotoMessage&& <p className="text-danger">{fotoMessage}</p>}
                                                 </div>
                                                 <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                    <input type="submit" className="btn btn-primary" value="Agregar"/>
+                                                    <Link to="/"  className="btn btn-primary">Cancelar</Link>
+                                                    {(fotoMessage || razaMessage || edadMessage || nombreMessage)&&
+                                                        <input disabled={true} type="submit" className="btn btn-primary" value="Terminar Edit"/>
+                                                    }
+                                                    {(!fotoMessage && !razaMessage && !edadMessage && !nombreMessage)&&
+                                                        <input  type="submit" className="btn btn-primary" value="Terminar Edit"/>
+                                                    }
                                                 </div>
-                                                <Link to="/"  className="btn btn-primary">Cancelar</Link>
                                             </form>
                                         </div>
                                     </div>
@@ -174,8 +238,6 @@ function NewPerrito(){
                 </div>
             </div>
         )
-    } 
-
-    
+    }
 }
 export default NewPerrito;

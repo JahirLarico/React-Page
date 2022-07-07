@@ -1,12 +1,13 @@
 import '../App.css';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
 import AuthService from '../services/auth';
 import { useNavigate } from 'react-router-dom';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 function Dispositivos(){
     const usuario = localStorage.getItem('username');
     const userId = localStorage.getItem('idDueno');
@@ -79,63 +80,85 @@ function Dispositivos(){
       if (dispositivos.length>0){
         return (
           <div>
+            <Navbar bg="light" expand="lg">
+              <Container>
+                <h1>{usuario}</h1>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                  <Button variant="primary" onClick={goIndex}>Index</Button>
+                      <Button variant="primary" onClick={goDispo}>Ir a dispositivos</Button>
+                      <Button variant="primary" onClick={addDispositivo}>Agregar un nuevo dispositivo</Button>
+                      <Button variant='success' onClick={logout}>Salir de la sesion</Button>
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
             <Container>
-            <h1>Dispositivos del usuario: {usuario}</h1>
-              <Button variant="primary" onClick={goIndex}>Index</Button>
-              <Button variant="primary" onClick={goDispo}>Ir a dispositivos</Button>
-              <Button variant="primary" onClick={addDispositivo}>Agregar un nuevo dispositivo</Button>
-              <Button variant='success' onClick={logout}>Salir de la sesion</Button>
-              <Table striped bordered hover variant="dark">
-                <thead>
-                  <tr>
-                    <th>Nombre del dispositivo</th>
-                    <th>URL del dispositivo</th>
-                    <th>Ubicacion del dispositivo</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {dispositivos.map((dispositivo)=>(
-                  <tr key={dispositivo.id}>
-                      <td>{dispositivo.nombre}</td>
-                      <td>{dispositivo.url_conexion}</td>
-                      <td>{dispositivo.ubicacion}</td>
-                      <td>
-                        <Button onClick={()=>deleteDispo(dispositivo.id)} variant="danger">Eliminar</Button>
-                        <Button onClick={()=>info(dispositivo.id)} variant="warning">Detalles</Button>
-                        <Button onClick={()=>editDispositivo(dispositivo.id, dispositivo.ubicacion , dispositivo.url_conexion, dispositivo.nombre)} variant="primary">Editar</Button>
-                      </td>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Nombre del dispositivo</th>
+                      <th>IP del dispositivo</th>
+                      <th>Ubicacion del dispositivo</th>
+                      <th>Acciones</th>
                     </tr>
-                ))}
-                </tbody>
-                <script src="acciones.js" ></script>
-              </Table>
+                  </thead>
+                  <tbody>
+                  {dispositivos.map((dispositivo)=>(
+                    <tr key={dispositivo.id}>
+                        <td>{dispositivo.nombre}</td>
+                        <td>{dispositivo.url_conexion}</td>
+                        <td>{dispositivo.ubicacion}</td>
+                        <td>
+                          <Button onClick={()=>deleteDispo(dispositivo.id)} variant="danger">Eliminar</Button>
+                          <Button onClick={()=>info(dispositivo.id)} variant="warning">Detalles</Button>
+                          <Button onClick={()=>editDispositivo(dispositivo.id, dispositivo.ubicacion , dispositivo.url_conexion, dispositivo.nombre)} variant="primary">Editar</Button>
+                        </td>
+                      </tr>
+                  ))}
+                  </tbody>
+                  <script src="acciones.js" ></script>
+                </table>
+              </div>
             </Container>
           </div>
         )
-      } 
+      }
       return (
         <div>
+          <Navbar bg="light" expand="lg">
+              <Container>
+                <h1>{usuario}</h1>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                  <Button variant="primary" onClick={goIndex}>Index</Button>
+                      <Button variant="primary" onClick={goDispo}>Ir a dispositivos</Button>
+                      <Button variant="primary" onClick={addDispositivo}>Agregar un nuevo dispositivo</Button>
+                      <Button variant='success' onClick={logout}>Salir de la sesion</Button>
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
           <Container>
-          <h1>Dispositivos del usuario: {usuario}</h1>
-            <Button variant="primary" onClick={goIndex}>Index</Button>
-            <Button variant="primary" onClick={goDispo}>Ir a dispositivos</Button>
-            <Button variant="primary" onClick={addDispositivo}>Agregar un nuevo dispositivo</Button>
-            <Button variant='success' onClick={logout}>Salir de la sesion</Button>
-            <h1>No tiene dispositivos , agrege alguno</h1>
-            <Table striped bordered hover variant="dark">
-              <thead>
-                <tr>
-                  <th>Nombre del dispositivo</th>
-                  <th>URL del dispositivo</th>
-                  <th>Ubicacion del dispositivo</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-              <script src="acciones.js" ></script>
-            </Table>
+          <h1>No tiene dispositivos , agrege alguno</h1>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                      <th>Nombre del dispositivo</th>
+                      <th>IP del dispositivo</th>
+                      <th>Ubicacion del dispositivo</th>
+                      <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <script src="acciones.js" ></script>
+              </table>
+            </div>
           </Container>
         </div>
       )

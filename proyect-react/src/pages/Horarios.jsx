@@ -2,14 +2,16 @@ import '../App.css';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
 import { useState, useEffect } from 'react';
 import AuthService from '../services/auth';
 import { useNavigate } from 'react-router-dom';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 function Horarios(){
     const [horarios,setHorarios] = useState([]);
     const idDispo = localStorage.getItem('idDispo');
+    const usuario = localStorage.getItem('username');
     const navigate = useNavigate()
     const getHorarios =async()=>{
         const res = await axios.get('https://apidjango.frankalvarez.dev/dispositivo/horarios?dispositivoId='+ idDispo);
@@ -62,11 +64,67 @@ function Horarios(){
       if (horarios.length > 0){
         return (
           <div>
+            <Navbar bg="light" expand="lg">
+              <Container>
+                <h1>{usuario}</h1>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                      <Button variant="primary" onClick={goIndex}>Index</Button>
+                      <Button variant="primary" onClick={goDispo}>Ir a dispositivos</Button>
+                      <Button variant='success' onClick={logout}>Salir de la sesion</Button>
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
             <Container>
-            <Button variant="primary" onClick={goIndex}>Index</Button>
-            <Button variant="primary" onClick={goDispo}>Ir a dispositivos</Button>
-            <Button variant='success' onClick={logout}>Salir de la sesion</Button>
-              <Table striped bordered hover variant="dark">
+            <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Dia de la modificacion</th>
+                      <th>Hora de la modificacion</th>
+                      <th>Cantidad</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {horarios.map((horario)=>(
+                    <tr key={horario.id}>
+                        <td>{horario.fecha}</td>
+                        <td>{horario.hora}</td>
+                        <td>{horario.cantidad_comida}</td>
+                        <td>
+                        <Button onClick={()=> deleteHorario(horario.id)} variant="danger">Eliminar</Button>
+                        </td>
+                      </tr>
+                  ))}
+                  </tbody>
+                </table>
+            </div>
+            </Container>
+          </div>
+        )
+      }
+        return (
+          <div>
+            <Navbar bg="light" expand="lg">
+              <Container>
+                <h1>{usuario}</h1>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                  <Nav className="me-auto">
+                      <Button variant="primary" onClick={goIndex}>Index</Button>
+                      <Button variant="primary" onClick={goDispo}>Ir a dispositivos</Button>
+                      <Button variant='success' onClick={logout}>Salir de la sesion</Button>
+                  </Nav>
+                </Navbar.Collapse>
+              </Container>
+            </Navbar>
+            <Container>
+              <h2>Este dispositivo no tiene historial, agregue alguno desde la app</h2>
+              <div class="table-responsive">
+              <table class="table">
                 <thead>
                   <tr>
                     <th>Dia de la modificacion</th>
@@ -76,40 +134,9 @@ function Horarios(){
                   </tr>
                 </thead>
                 <tbody>
-                {horarios.map((horario)=>(
-                  <tr key={horario.id}>
-                      <td>{horario.fecha}</td>
-                      <td>{horario.hora}</td>
-                      <td>{horario.cantidad_comida}</td>
-                      <td>
-                      <Button onClick={()=> deleteHorario(horario.id)} variant="danger">Eliminar</Button>
-                      </td>
-                    </tr>
-                ))}
                 </tbody>
-              </Table>
-            </Container>
-          </div>
-        )
-      }
-        return (
-          <div>
-            <Container>
-              <Button variant="primary" onClick={goIndex}>Index</Button>
-              <Button variant="primary" onClick={goDispo}>Ir a dispositivos</Button>
-              <Button variant='success' onClick={logout}>Salir de la sesion</Button>
-              <h2>Este dispositivo no tiene historial, agregue alguno desde la app</h2>
-              <Table striped bordered hover variant="dark">
-                <thead>
-                  <tr>
-                    <th>Dia de la modificacion</th>
-                    <th>Hora de la modificacion</th>
-                    <th>Cantidad</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </Table>
+              </table>
+              </div>
             </Container>
           </div>
         )

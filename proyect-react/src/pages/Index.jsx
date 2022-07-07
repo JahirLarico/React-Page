@@ -1,12 +1,13 @@
 import '../App.css';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
 import AuthService from '../services/auth';
 import { useNavigate } from 'react-router-dom';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 function App() {
   const usuario = localStorage.getItem('username');
   const [authUser,setAuthUser] = useState('');
@@ -87,63 +88,88 @@ function App() {
   }
   if (dogs.length>0) {
     return (
+
       <div>
+      <Navbar bg="light" expand="lg">
         <Container>
-          <h1>Perros del usuario: {usuario}</h1>
-          <Button variant="primary" onClick={goIndex}>Index</Button>
-          <Button variant="primary" onClick={goDispo}>Ir a dispositivos</Button>
-          <Button variant="primary" onClick={addDog}>Agregar un nuevo Perrito</Button>
-          <Button variant='success' onClick={logout}>Salir de la sesion</Button>
-          <Table striped bordered hover variant="dark">
-            <thead>
-              <tr>
-              <th>Foto</th>
-                <th>Nombre del perro</th>
-                <th>Raza</th>
-                <th>Edad</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {dogs.map((dog)=>(
-                <tr key={dog.id}>
-                    <td> <img src={dog.foto} alt="Imagen del prro" height="50" width="100"></img></td>
-                    <td>{dog.nombre_perrito}</td>
-                    <td>{dog.raza}</td>
-                    <td>{dog.edad}</td>
-                    <td>
-                      <Button onClick={()=> editDog(dog.id,dog.nombre_perrito, dog.raza, dog.edad , dog.ult_alimentacion , dog.foto)} variant="primary">Editar</Button>
-                      <Button onClick={()=> deleteDog(dog.id)} variant="danger">Eliminar</Button>
-                    </td>
-                  </tr>
-              ))}
-            </tbody>
-          </Table>
+          <h1>{usuario}</h1>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+            <Button variant="primary" onClick={goIndex}>Index</Button>
+                <Button variant="primary" onClick={goDispo}>Ir a dispositivos</Button>
+                <Button variant="primary" onClick={addDog}>Agregar un nuevo Perrito</Button>
+                <Button variant='success' onClick={logout}>Salir de la sesion</Button>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+        <Container>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Foto</th>
+                  <th>Nombre del perro</th>
+                  <th>Raza</th>
+                  <th>Edad</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {dogs.map((dog)=>(
+                  <tr key={dog.id}>
+                      <td> <img src={dog.foto} alt="Imagen del prro" height="50" width="100"></img></td>
+                      <td>{dog.nombre_perrito}</td>
+                      <td>{dog.raza}</td>
+                      <td>{dog.edad}</td>
+                      <td>
+                        <Button onClick={()=> editDog(dog.id,dog.nombre_perrito, dog.raza, dog.edad , dog.ult_alimentacion , dog.foto)} variant="primary">Editar</Button>
+                        <Button onClick={()=> deleteDog(dog.id)} variant="danger">Eliminar</Button>
+                      </td>
+                    </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </Container>
       </div>
     )
   }
     return (
       <div>
+        <Navbar bg="light" expand="lg">
+          <Container>
+            <h1>{usuario}</h1>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+              <Button variant="primary" onClick={goIndex}>Index</Button>
+                  <Button variant="primary" onClick={goDispo}>Ir a dispositivos</Button>
+                  <Button variant="primary" onClick={addDog}>Agregar un nuevo Perrito</Button>
+                  <Button variant='success' onClick={logout}>Salir de la sesion</Button>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
         <Container>
-          <h1>Perros del usuario: {usuario}</h1>
-          <Button variant="primary" onClick={goIndex}>Index</Button>
-          <Button variant="primary" onClick={goDispo}>Ir a dispositivos</Button>
-          <Button variant="primary" onClick={addDog}>Agregar un nuevo Perrito</Button>
-          <Button variant='success' onClick={logout}>Salir de la sesion</Button>
           <h2> No existen perros , pruebe ingresar alguno </h2>
-          <Table striped bordered hover variant="dark">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </Table>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Foto</th>
+                  <th>Nombre del perro</th>
+                  <th>Raza</th>
+                  <th>Edad</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
         </Container>
       </div>
     )

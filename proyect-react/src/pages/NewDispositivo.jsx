@@ -15,6 +15,39 @@ function NewDispositivo(){
     const [JSONnombreDispo,setJSONnombreDispo] = useState(nombreDispo);
     const [JSONurlDispo,setJSONurlDispo] = useState(urlDispo);
     const [JSONubicacion , setJSONubicacion] = useState(ubicacionDispo);
+
+    const [nombreMessage,setNombreMessage] = useState('');
+    const [urlMessage,setUrlMessage] = useState('');
+    const [ubicacionMessage,setUbicacionMessage] = useState('');
+
+    function validationNombreDispo(texto){
+        if(/^([A-Z]).*[a-zA-Z0-9]/.test(texto)){
+            setJSONnombreDispo(texto);
+            setNombreMessage('');
+        }
+        else{
+            setNombreMessage("Debe comenzar con mayuscula y contener solo letras y numeros");
+        }
+    }
+    function validationUrl(texto){
+        if(/^([0-9]{0,3})\.([0-9]{0,3})\.([0-9]{0,3})\.([0-9]{0,3})$/.test(texto)){
+            setJSONurlDispo(texto);
+            setUrlMessage("")
+        }
+        else{
+            setUrlMessage("Error en la direcciona IP , debe ser de la forma xxx.xxx.xxx.xxx")
+        }
+    }
+
+    function validationUbicacion(texto){
+        if(/^([A-Z]).*[a-zA-Z0-9]/.test(texto)){
+            setJSONubicacion(texto)
+            setUbicacionMessage("")
+        }
+        else {
+            setUbicacionMessage("Debe comenzar con mayuscula y contener solo letras y numeros")
+        }
+    }
     function add(e){
         e.preventDefault();
         const data = {
@@ -59,30 +92,44 @@ function NewDispositivo(){
                                                     <input className="form-control"
                                                     type="text"
                                                     placeholder="NOMBRE DEL DISPO"
-                                                    onChange={(e) => setJSONnombreDispo(e.target.value)}
+                                                    onChange={(e) => validationNombreDispo(e.target.value)}
                                                     />
                                                     <label>Nombre del dispositivo</label>
+                                                    {nombreMessage &&
+                                                        <p className="text-danger">{nombreMessage}</p>
+                                                    }
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
                                                     type="text"
                                                     placeholder="usuario"
-                                                    onChange={(e) => setJSONurlDispo(e.target.value)}
+                                                    onChange={(e) => validationUrl(e.target.value)}
                                                     />
-                                                    <label>URL del dispositivo</label>
+                                                    <label>Direccion IP del dispositivo</label>
+                                                    {urlMessage &&
+                                                        <p className="text-danger">{urlMessage}</p>
+                                                    }
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
                                                     type="text"
                                                     placeholder="usuario"
-                                                    onChange={(e) => setJSONubicacion(e.target.value)}
+                                                    onChange={(e) => validationUbicacion(e.target.value)}
                                                     />
                                                     <label>Ubicacion del dispositivo</label>
+                                                    {ubicacionMessage &&
+                                                        <p className="text-danger">{ubicacionMessage}</p>
+                                                    }
                                                 </div>
                                                 <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                    <input type="submit" className="btn btn-primary" value="Agregar"/>
-                                                </div>
                                                 <Link to="/dispositivos"  className="btn btn-primary">Cancelar</Link>
+                                                    {(nombreMessage||urlMessage||ubicacionMessage) &&
+                                                        <input disabled={true} type="submit" className="btn btn-primary" value="Agregar"/>
+                                                    }
+                                                    {(!nombreMessage&&!urlMessage&&!ubicacionMessage) &&
+                                                        <input type="submit" className="btn btn-primary" value="Agregar"/>
+                                                    }
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -121,30 +168,44 @@ function NewDispositivo(){
                                                     <input className="form-control"
                                                     type="text"
                                                     placeholder="usuario"
-                                                    defaultValue={JSONnombreDispo} onChange={(e) => setJSONnombreDispo(e.target.value)}
+                                                    defaultValue={JSONnombreDispo} onChange={(e) => validationNombreDispo(e.target.value)}
                                                     />
                                                     <label>Nombre del dispositivo</label>
+                                                    {nombreMessage &&
+                                                        <p className="text-danger">{nombreMessage}</p>
+                                                    }
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
                                                     type="text"
                                                     placeholder="usuario"
-                                                    defaultValue={JSONurlDispo} onChange={(e) => setJSONurlDispo(e.target.value)}
+                                                    defaultValue={JSONurlDispo} onChange={(e) => validationUrl(e.target.value)}
                                                     />
                                                     <label>URL del dispositivo</label>
+                                                    {urlMessage &&
+                                                        <p className="text-danger">{urlMessage}</p>
+                                                    }
                                                 </div>
                                                 <div className="form-floating mb-3">
                                                     <input className="form-control"
                                                     type="text"
                                                     placeholder="usuario"
-                                                    defaultValue={JSONubicacion} onChange={(e) => setJSONubicacion(e.target.value)}
+                                                    defaultValue={JSONubicacion} onChange={(e) => validationUbicacion(e.target.value)}
                                                     />
-                                                    <label>Ubicacion del dispositivo</label>
+                                                    <label>Direccion IP del dispositivo</label>
+                                                    {ubicacionMessage &&
+                                                        <p className="text-danger">{ubicacionMessage}</p>
+                                                    }
                                                 </div>
                                                 <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                    <input type="submit" className="btn btn-primary" value="Editar"/>
-                                                </div>
                                                 <Link to="/dispositivos"  className="btn btn-primary">Cancelar</Link>
+                                                    {(nombreMessage||urlMessage||ubicacionMessage) &&
+                                                        <input disabled={true} type="submit" className="btn btn-primary" value="Agregar"/>
+                                                    }
+                                                    {(!nombreMessage&&!urlMessage&&!ubicacionMessage) &&
+                                                        <input type="submit" className="btn btn-primary" value="Agregar"/>
+                                                    }
+                                                </div>
                                             </form>
                                         </div>
                                     </div>

@@ -5,7 +5,27 @@ import {useState} from 'react';
 function Register(){
     const [username,setUsername] = useState('');
     const [password,setPassword] = useState('');
+    const [userMessage,setUserMessage] = useState('');
+    const [passwordMessage,setPasswordMessage] = useState('');
     const navigate = useNavigate();
+    function validationuser(texto){
+        if(/^[a-zA-Z0-9_]*$/.test(texto)){
+            setUsername(texto);
+            setUserMessage("");
+        }
+        else{
+            setUserMessage("El usuario no puede conterner espacios")
+        }
+    }
+    function validationpassword(texto){
+        if (/(?=[A-Z])(?=.*[0-9].*)[a-zA-Z0-9_]{8,}/.test(texto)){
+            setPassword(texto)
+            setPasswordMessage("");
+        }
+        else {
+            setPasswordMessage("Recuerde que tiene que ser minimo de 8 caracteres ademas de iniciar con mayuscula , poseer almenos un numero y no tener espacios")
+        }
+    }
     function add(e){
         e.preventDefault();
         const data = {
@@ -43,17 +63,19 @@ function Register(){
                                                 <input className="form-control"
                                                 type="text"
                                                 placeholder="usuario"
-                                                onChange={(e)=>setUsername(e.target.value)}
+                                                onChange={(e)=>validationuser(e.target.value)}
                                                 />
                                                 <label>Nombre del usuario</label>
+                                                {userMessage && <p className="text-danger">{userMessage}</p>}
                                             </div>
                                             <div className="form-floating mb-3">
                                                 <input className="form-control"
                                                 type="password"
                                                 placeholder="Password"
-                                                onChange={(e)=>setPassword(e.target.value)}
+                                                onChange={(e)=>validationpassword(e.target.value)}
                                                 />
                                                 <label>Contraseña del usuario</label>
+                                                {passwordMessage && <p className="text-danger">{passwordMessage}</p>}
                                             </div>
                                             <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <input type="submit" className="btn btn-primary" value="Agregar usuario"/>

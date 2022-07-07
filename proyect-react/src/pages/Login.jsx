@@ -6,7 +6,28 @@ function Login() {
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const [userMessage, setUserMessage] = useState('');
+    const [passwordMessage, setPasswordMessage] = useState('');
     const navigate = useNavigate()
+
+    function validationuser(texto){
+        if(/^[a-zA-Z0-9_]*$/.test(texto)){
+            setUsuario(texto);
+            setUserMessage("");
+        }
+        else{
+            setUserMessage("El usuario no puede conterner espacios")
+        }
+    }
+    function validationpassword(texto){
+        if (/(?=[A-Z])(?=.*[0-9].*)[a-zA-Z0-9_]{8,}/.test(texto)){
+            setPassword(texto)
+            setPasswordMessage("")
+        }
+        else {
+            setPasswordMessage("Recuerde que tiene que ser minimo de 8 caracteres ademas de iniciar con mayuscula y poseer almenos un numero")
+        }
+    }
 
     function Login(e){
         e.preventDefault();
@@ -35,9 +56,10 @@ function Login() {
                                                         id="inputText"
                                                         type="text"
                                                         placeholder="usuario"
-                                                        value = {usuario} onChange={(e)=>setUsuario(e.target.value)}
+                                                        value = {usuario} onChange={(e)=>validationuser(e.target.value)}
                                                         />
                                                         <label >Usuario</label>
+                                                        {userMessage && <p className="text-danger">{userMessage}</p>}
                                                     </div>
                                                     <div className="form-floating mb-3">
                                                         <input className="form-control"
@@ -47,6 +69,7 @@ function Login() {
                                                         value = {password} onChange={(e)=>setPassword(e.target.value)}
                                                         />
                                                         <label >Password</label>
+                                                        {passwordMessage && <p className="text-danger">{passwordMessage}</p>}
                                                     </div>
                                                     <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                     <p> Olvidaste tu contraseña?</p>
